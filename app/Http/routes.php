@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('hubs/{hub_id}/traces', 'TraceController@store');

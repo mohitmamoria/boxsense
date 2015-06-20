@@ -19,4 +19,9 @@ class Hub extends Model
      * @var array
      */
     protected $fillable = ['uuid', 'salt'];
+
+    public static function findByUuid($uuid)
+    {
+        return static::where('uuid', $uuid)->first();
+    }
 }
