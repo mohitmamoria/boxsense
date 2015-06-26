@@ -17,3 +17,11 @@ $factory->define(App\Hub::class, function ($faker) {
         'salt' => Crypt::encrypt(str_random(11)),
     ];
 });
+
+$factory->define(App\Node::class, function ($faker) {
+    return [
+        'uuid' => $faker->uuid,
+        'generation' => 1,
+        'type' => 'DEPTH',
+    ];
+});
