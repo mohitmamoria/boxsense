@@ -13,7 +13,7 @@ class TraceController extends Controller
 {
     public function store(RecordTraceRequest $request, $hubId)
     {
-        $request->validHash();
+        if( ! $request->validHash()) throw new \Exception('Invalid Hash');
         
         $input = $request->all();
         $input = array_add($input, 'hub_id', Hub::findByUuid($hubId)->id);

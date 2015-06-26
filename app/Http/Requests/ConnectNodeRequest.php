@@ -33,6 +33,9 @@ class ConnectNodeRequest extends Request
 
     public function validHash()
     {
-        return RequestHash::verify($this);
+        $hub = Hub::findByUuid($this->route()->parameter('hub_id'));
+        $salt = Crypt::decrypt($hub->salt);
+
+        return RequestHash::verify($this, $salt);
     }
 }
