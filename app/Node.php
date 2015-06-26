@@ -24,4 +24,13 @@ class Node extends Model
     {
         return static::where('uuid', $uuid)->first();
     }
+
+    public static function findForConnection($uuid, $generation, $type)
+    {
+        return static::where('uuid', $uuid)
+            ->where('generation', $generation)
+            ->where('type', $type)
+            ->whereNull('hub_id')
+            ->firstOrFail();
+    }
 }

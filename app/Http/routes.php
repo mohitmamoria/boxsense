@@ -11,4 +11,5 @@
 |
 */
 
+Route::post('hubs/{hub_id}/nodes', 'NodeController@connect');
 Route::post('hubs/{hub_id}/traces', 'TraceController@store');

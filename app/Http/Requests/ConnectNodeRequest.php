@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\Request;
 use App\Hub;
 
-class RecordTraceRequest extends Request
+class ConnectNodeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
