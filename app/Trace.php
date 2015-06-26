@@ -18,5 +18,5 @@ class Trace extends Model
      *
      * @var array
      */
-    protected $fillable = ['hub_id', 'node_id', 'node_generation', 'type', 'value', 'created_at_node'];
+    protected $fillable = ['hub_id', 'node_id', 'value', 'created_at_node'];
 }

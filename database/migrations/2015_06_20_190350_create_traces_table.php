@@ -16,8 +16,6 @@ class CreateTracesTable extends Migration
             $table->increments('id');
             $table->integer('hub_id');
             $table->integer('node_id');
-            $table->string('node_generation');
-            $table->enum('type', ['DEPTH']);
             $table->integer('value');
             $table->timestamp('created_at_node');
             $table->timestamps();

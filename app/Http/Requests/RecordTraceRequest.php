@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Support\Facades\Crypt;
+use RequestHash;
 use App\Http\Requests\Request;
 use App\Hub;
 
@@ -32,20 +33,6 @@ class RecordTraceRequest extends Request
 
     public function validHash()
     {
-        $input = $this->all();
-        $hash = array_pull($input, 'hash');
-        ksort($input);
-
-        $hub = Hub::findByUuid($this->route()->parameter('hub_id'));
-        $salt = Crypt::decrypt($hub->salt);
-
-        $stringlets = [];
-        foreach($input as $key => $value)
-        {
-            $stringlets[] = implode('=', [$key, $value]);
-        }
-        $string = implode('&', $stringlets);
-
-        return $hash == hash_hmac('sha256', $string, $salt);
+        return RequestHash::verify($this);
     }
 }
