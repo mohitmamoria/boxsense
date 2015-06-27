@@ -23,5 +23,6 @@ $factory->define(App\Node::class, function ($faker) {
         'uuid' => $faker->uuid,
         'generation' => 1,
         'type' => 'DEPTH',
+        'capacity' => 100
     ];
 });

@@ -18,7 +18,7 @@ class Node extends Model
      *
      * @var array
      */
-    protected $fillable = ['uuid', 'generation', 'type'];
+    protected $fillable = ['uuid', 'generation', 'type', 'capacity'];
 
     public static function findByUuid($uuid)
     {
@@ -31,6 +31,7 @@ class Node extends Model
             ->where('generation', $generation)
             ->where('type', $type)
             ->whereNull('hub_id')
+            ->whereNull('connected_at')
             ->firstOrFail();
     }
 }

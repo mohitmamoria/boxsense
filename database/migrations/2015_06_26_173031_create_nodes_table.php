@@ -18,6 +18,7 @@ class CreateNodesTable extends Migration
             $table->string('uuid');
             $table->tinyInteger('generation');
             $table->enum('type', ['DEPTH']);
+            $table->integer('capacity');
             $table->timestamps();
             $table->timestamp('connected_at')->nullable();
         });
