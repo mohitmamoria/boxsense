@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Node;
 
 class Hub extends Model
 {
@@ -19,6 +20,11 @@ class Hub extends Model
      * @var array
      */
     protected $fillable = ['uuid', 'salt'];
+
+    public function nodes()
+    {
+        return $this->hasMany(Node::class);
+    }
 
     public static function findByUuid($uuid)
     {
