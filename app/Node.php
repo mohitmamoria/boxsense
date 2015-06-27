@@ -52,4 +52,9 @@ class Node extends Model
             ->whereNotNull('hub_id')
             ->get();
     }
+
+    public function latestTrace()
+    {
+        return $this->traces()->latest('created_at_node')->first();
+    }
 }
