@@ -1,3 +1,3 @@
 ## Boxsense
 
-Smart home!
+Smart sensors!
