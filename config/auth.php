@@ -2,7 +2,7 @@
 
 return [
 
-    'bypass_hash' = env('BYPASS_HASH'),
+    'bypass_hash' = env('BYPASS_HASH', false),
 
     /*
     |--------------------------------------------------------------------------
