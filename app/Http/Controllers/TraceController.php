@@ -23,6 +23,6 @@ class TraceController extends Controller
         
         $trace = Trace::create($input);
 
-        dd($trace);
+        return $trace->toJson();
     }
 }

@@ -23,6 +23,6 @@ class NodeController extends Controller
         $node->connected_at = Carbon::now();
         $node->save();
 
-        dd($node);
+        return $node->toJson();
     }
 }
