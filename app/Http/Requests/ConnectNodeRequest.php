@@ -30,12 +30,4 @@ class ConnectNodeRequest extends Request
             //
         ];
     }
-
-    public function validHash()
-    {
-        $hub = Hub::findByUuid($this->route()->parameter('hub_id'));
-        $salt = Crypt::decrypt($hub->salt);
-
-        return RequestHash::verify($this, $salt);
-    }
 }

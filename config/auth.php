@@ -2,6 +2,8 @@
 
 return [
 
+    'bypass_hash' = env('BYPASS_HASH'),
+
     /*
     |--------------------------------------------------------------------------
     | Default Authentication Driver
