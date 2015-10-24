@@ -38,14 +38,18 @@ class IdentifyDepletion extends Command
      */
     public function handle()
     {
-        $nodes = Node::connected();
+        $this->info('Beginning at... '.time().PHP_EOL);
 
+        $nodes = Node::connected();
+        $this->comment('Connected nodes found: '. $nodes->count().PHP_EOL);
         foreach($nodes as $node)
         {
+            $this->comment('Trying for Node: '.$node->uuid.' having latest trace: '.$node->latestTrace()->value.' against threshold: '. (int) $this->argument('threshold').PHP_EOL);
             if($node->latestTrace()->value < (int) $this->argument('threshold'))
             {
-                $this->comment(PHP_EOL.'Notifying HUB: '.$node->hub->uuid.' for Node: '.$node->uuid.PHP_EOL);
+                $this->comment('Notifying HUB: '.$node->hub->uuid.' for Node: '.$node->uuid.PHP_EOL);
             }
         }
+        $this->info('Finishing at... '.time().PHP_EOL);
     }
 }
