@@ -42,9 +42,9 @@ class IdentifyDepletion extends Command
 
         foreach($nodes as $node)
         {
-            if($node->latestTrace()->value < (0.90 * $node->capacity))
+            if($node->latestTrace()->value < 10)
             {
-                $this->comment(PHP_EOL.'Notifying HUB: '.$node->hub->uuid.PHP_EOL);
+                $this->comment(PHP_EOL.'Notifying HUB: '.$node->hub->uuid.' for Node: '.$node->uuid.PHP_EOL);
             }
         }
     }
