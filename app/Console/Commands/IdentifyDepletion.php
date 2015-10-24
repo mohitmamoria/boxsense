@@ -12,7 +12,7 @@ class IdentifyDepletion extends Command
      *
      * @var string
      */
-    protected $signature = 'traces:depletion';
+    protected $signature = 'traces:depletion {threshold}';
 
     /**
      * The console command description.
@@ -42,7 +42,7 @@ class IdentifyDepletion extends Command
 
         foreach($nodes as $node)
         {
-            if($node->latestTrace()->value < 10)
+            if($node->latestTrace()->value < (int) $this->argument('threshold'))
             {
                 $this->comment(PHP_EOL.'Notifying HUB: '.$node->hub->uuid.' for Node: '.$node->uuid.PHP_EOL);
             }
