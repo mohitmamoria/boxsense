@@ -55,6 +55,6 @@ class Node extends Model
 
     public function latestTrace()
     {
-        return $this->traces()->latest('created_at_node')->first();
+        return $this->traces()->latest('created_at')->first();
     }
 }
