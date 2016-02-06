@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Hub, App\Node, App\Trace;
 use Horntell;
+use Carbon\Carbon;
 
 class IdentifyDepletion extends Command
 {
@@ -47,16 +48,18 @@ class IdentifyDepletion extends Command
         $this->comment('Connected nodes found: '. $nodes->count().PHP_EOL);
         foreach($nodes as $node)
         {
-            $latestTrace = $node->latestTrace()->value;
-            $this->comment('Trying for Node: '.$node->uuid.' having latest trace: '.$latestTrace.' against threshold: '. (int) $this->argument('threshold').PHP_EOL);
-            if($latestTrace < (int) $this->argument('threshold'))
+            $latestTrace = $node->latestTrace();
+            $this->comment('Trying for Node: '.$node->uuid.' having latest trace: '.$latestTrace->value.' against threshold: '. (int) $this->argument('threshold').PHP_EOL);
+            if(is_null($latestTrace->processed_at) && $latestTrace->value < (int) $this->argument('threshold'))
             {
                 $this->comment('Notifying HUB: '.$node->hub->uuid.' for Node: '.$node->uuid.PHP_EOL);
                 (new Horntell\Campaign)->toProfile(
                     $node->hub->uuid,
                     '562b4ad39f17f6a06d8b4567',
-                    ['node_uuid' => $node->uuid, 'latest_trace' => $latestTrace]
+                    ['node_uuid' => $node->uuid, 'latest_trace' => $latestTrace->value]
                 );
+                $latestTrace->processed_at = Carbon::now();
+                $latestTrace->save();
             }
         }
         $this->info('Finishing at... '.time().PHP_EOL);
